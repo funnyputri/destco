@@ -28,7 +28,7 @@ $id=$_GET['id'];
                     <table class="table">
                       <thead>
                         <tr>
-                          <th>No Produksi</th>
+                          <!--th>No Produksi</th-->
                           <th>Kode Produk</th>
                           <th>Nama Produk</th>
                           <th>Qty</th>
@@ -38,7 +38,7 @@ $id=$_GET['id'];
                         </tr>
                       </thead>
                       <?php
-                                            $sql = "SELECT * FROM detailproduksi";
+                                            $sql = "SELECT * FROM detailproduksi" ;
                                             $ret = pg_query ($db, $sql);
                                             if (!$ret){
                                                 echo pg_last_error($db);
@@ -48,9 +48,9 @@ $id=$_GET['id'];
                                                     echo "";
                                         ?>      
                                             <tr>
-                                                <td>
-                                                    <?php echo $row[0];?>
-                                                </td>
+                                                <!--td>
+                                                    <!?php echo $row[0];?>
+                                                </td-->
                                                 <td>
                                                     <?php echo $row[1];?>
                                                 </td>
