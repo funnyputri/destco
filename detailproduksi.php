@@ -38,7 +38,7 @@ $id=$_GET['id'];
                         </tr>
                       </thead>
                       <?php
-                                            $sql = "SELECT * FROM detailproduksi" ;
+                                            $sql = "SELECT * FROM detailproduksi where noproduksi ='$id'" ;
                                             $ret = pg_query ($db, $sql);
                                             if (!$ret){
                                                 echo pg_last_error($db);
