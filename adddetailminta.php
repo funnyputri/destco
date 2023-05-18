@@ -1,9 +1,10 @@
 <?php
 ob_start();
 session_start();
-  include_once "header.php";
-  include_once "menu.php";
-  include_once "koneksi.php";
+include_once "header.php";
+include_once "menu.php";
+include_once "koneksi.php";
+$nopro = $_GET['nopro'];
 ?>
 
 
@@ -61,23 +62,27 @@ if (isset($_POST['pilihan'])) {
                 <div class="card">
                   <div class="card-body">
                   <form action="simpandp.php" method="POST">
-                    <form class="forms-sample">
-                      <div class="form-group row">
-                        <label for="exampleInputUsername2" class="col-sm-3 col-form-label">No Produksi</label>
-                        <div class="col-sm-9">
-                          <input type="text" class="form-control" name="no_produk" value="<?=$format?>" class readonly ></div></div> 
-
+                      <input type="hidden" class="form-control" name="noproduksi" value="<? echo $nopro?>" class readonly >
                       <div class="form-group row">
                         <label for="exampleInputUsername2" class="col-sm-3 col-form-label">Kode Produk</label>
                         <div class="col-sm-9">
-                          <select name="pilihan" class="form-control" input type="text"> 
-                          <option> DC-002 </option>
-                          <option> MC-002 </option>
-                          <option> TC-001 </option>
-                          <option> WCA-001 </option>
-                          <option> CG-001 </option>
-                          <option> BC-001 </option>
-                          <option> MCA-002 </option>
+                          <?php
+                            // Mengambil data dari tabel produkjadi
+                            $sql = "SELECT * FROM produkjadi";
+                            $ret = pg_query($db, $sql);
+                            if (!$ret) {
+                                echo pg_last_error($db);
+                                exit;
+                            }
+                          ?>
+                          <select name="kdproduk" class="form-control" input type="text">
+                            <option value="">Pilih Kode Produk</option>
+                          <?php
+                            while ($row = pg_fetch_row($ret)) {
+                                echo "<option value='" . $row[0] . "'>" . $row[0] . "</option>";
+                            }
+                            pg_close($db);
+                          ?>
                         </select>
                         </div>
                       </div>   
@@ -109,7 +114,7 @@ if (isset($_POST['pilihan'])) {
                         </div>
                       </div>  
                       <button type="submit" class="btn btn-gradient-primary me-2">Submit</button>
-</form>
+                  </form>
                                 <!-- END DATA TABLE-->
                       
 
