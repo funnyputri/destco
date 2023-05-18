@@ -25,18 +25,19 @@ $nopro =$_POST ['noproduksi'];
 $kdpro =$_POST ['kdproduk'];
 $nama =$_POST ['nmproduk'];
 $hrg =$_POST ['harga'];
+$qty =$_POST ['qty'];
 $tot =$_POST ['total'];
 
 
-$sql ="INSERT INTO detailproduksi (noproduksi, kdproduk, nmproduk, harga, total)
-Values ('$nopro','$kdpro','$nama','$hrg','$tot');" ;
+$sql ="INSERT INTO detailproduksi (noproduksi, kdproduk, nmproduk, qty, harga, total)
+Values ('$nopro','$kdpro','$nama','$qty','$hrg','$tot');" ;
 $ret = pg_query($db, $sql);
 if (!$ret) {
     echo pg_last_error($db);
     exit;
 } else {
     echo "Simpan Data Sukses....<br>";
-    echo "Kembali : <a href='detailproduksi.php'>Klik</a>";
+    echo "Kembali : <a href='detailproduksi.php?id=" .$nopro. "'>Klik</a>";
 }
 ?>
                                 <!-- END DATA TABLE-->
